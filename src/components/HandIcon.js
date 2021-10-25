@@ -9,19 +9,19 @@ function loop(length) {
   let rows = [];
 
   for (let index = 1; index <= length; index++) {
-    if ((index + 2) % 3 == 0)
+    if ((index + 2) % 3 === 0)
       rows.push(
         <li>
           <FontAwesomeIcon icon={faHandPaper} />
         </li>
       );
-    if ((index + 1) % 3 == 0)
+    if ((index + 1) % 3 === 0)
       rows.push(
         <li>
           <FontAwesomeIcon icon={faHandScissors} />
         </li>
       );
-    if ((index + 0) % 3 == 0)
+    if ((index + 0) % 3 === 0)
       rows.push(
         <li>
           <FontAwesomeIcon icon={faHandRock} />
@@ -34,7 +34,7 @@ function loop(length) {
 
 const HandIcon = (props) => {
   let arrLength = props.arrLength;
-  if (props.arrLength == undefined) arrLength = [1, 1];
+  if (props.arrLength === undefined) arrLength = [1, 1];
 
   return (
     <div className="marquee">
