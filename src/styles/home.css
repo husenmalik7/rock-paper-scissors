@@ -8,11 +8,6 @@
   align-items: center;
 }
 
-.intro-body {
-  position: absolute;
-  color: white;
-}
-
 .marquee {
   width: 100vw;
   height: 20vh;
@@ -85,4 +80,52 @@ section div:nth-child(even) .marquee-content {
   100% {
     transform: translateX(-180vw);
   }
+}
+
+@font-face {
+  font-family: "game-over";
+  /* src: url("../assets/game-over.ttf"); */
+  src: url("../assets/Thirteen-Pixel-Fonts.ttf");
+}
+
+.intro-body {
+  position: absolute;
+  color: white;
+  background: red;
+  background-color: rgba(200, 10, 10, 0.3);
+  padding: 50px 180px 50px;
+}
+
+.go-font {
+  font-family: game-over;
+  text-align: center;
+}
+
+.button-3d {
+  position: relative;
+  width: auto;
+  color: #ecf0f1;
+  text-decoration: none;
+
+  border-radius: 5px;
+  border: solid 1px #f39c12;
+  background: #e67e22;
+  text-align: center;
+  padding: 16px 18px 14px;
+
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  transition: all 0.1s;
+
+  -webkit-box-shadow: 0px 6px 0px #d35400;
+  -moz-box-shadow: 0px 6px 0px #d35400;
+  box-shadow: 0px 6px 0px #d35400;
+}
+
+.button-3d:active {
+  -webkit-box-shadow: 0px 2px 0px #d35400;
+  -moz-box-shadow: 0px 2px 0px #d35400;
+  box-shadow: 0px 2px 0px #d35400;
+  position: relative;
+  top: 4px;
 }

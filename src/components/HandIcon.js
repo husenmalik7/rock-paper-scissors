@@ -32,12 +32,15 @@ function loop(length) {
   return rows;
 }
 
-const HandIcon = () => {
+const HandIcon = (props) => {
+  let arrLength = props.arrLength;
+  if (props.arrLength == undefined) arrLength = [1, 1];
+
   return (
     <div className="marquee">
       <ul className="marquee-content">
-        {loop(9)}
-        {loop(5)}
+        {loop(arrLength[0])}
+        {loop(arrLength[1])}
       </ul>
     </div>
   );
