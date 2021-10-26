@@ -5,6 +5,8 @@ import {
   faHandPaper,
 } from "@fortawesome/free-solid-svg-icons";
 
+import "../styles/hand-icon.css";
+
 function loop(length) {
   let rows = [];
 
