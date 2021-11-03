@@ -1,5 +1,8 @@
+// TODO: create fixed position for table and pagination
+// TODO: responsive pagination css
+
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
@@ -7,7 +10,7 @@ import { Pagin } from "../components/Pagin";
 
 import "../styles/high-scores.css";
 
-// const API_URL = "https://rock-paper-scissors-api-heroku.herokuapp.com/highscore";
+// const API_URL ="https://rock-paper-scissors-api-heroku.herokuapp.com/highscorezxc";
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default class Highscores extends Component {
@@ -91,58 +94,68 @@ export default class Highscores extends Component {
 
     return (
       <div className="highscores">
-        {isLoading === true ? <p>sedang loading</p> : <p>tidka loading</p>}
+        {errorMessage ? (
+          <p className="center">{errorMessage}</p>
+        ) : (
+          <>
+            {isLoading ? (
+              <div className="center">
+                <Spinner animation="border" variant="light" />
+              </div>
+            ) : (
+              <>
+                <h1>HIGH SCORES</h1>
 
-        <p>{errorMessage}</p>
+                <table>
+                  <tbody>
+                    <tr>
+                      <th>USERNAME</th>
+                      <th>WIN STREAKS</th>
+                      <th>DATE</th>
+                    </tr>
 
-        <Pagin
-          paginationObject={paginationObject}
-          paginationState={pagination}
-        />
+                    {highscores.map((h, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>{h.username}</td>
+                          <td>{h.win_streak}</td>
+                          <td>{h.created_at}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
 
-        {paginationObject.page > 1 ? (
-          <a href={`/highscores?page=${paginationObject.page - 1}`}>Before</a>
-        ) : null}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Link to="/" style={{ textDecoration: "none" }}>
+                    <h4 className="button-3d-highscores go-font">Back</h4>
+                  </Link>
 
-        {pagination.map((p, index) => {
-          return (
-            <a
-              key={index}
-              href={`highscores?page=${p}`}
-              style={p === paginationObject.page ? { color: "red" } : null}
-            >
-              {p}
-            </a>
-          );
-        })}
+                  <div
+                    style={{
+                      paddingLeft: "10em",
+                      paddingRight: "10em",
+                    }}
+                  >
+                    <Pagin
+                      paginationObject={paginationObject}
+                      paginationState={pagination}
+                    />
+                  </div>
 
-        {paginationObject.page < paginationObject.numberOfPages ? (
-          <a href={`/highscores?page=${paginationObject.page + 1}`}>After</a>
-        ) : null}
-
-        <table border="1px">
-          <tbody>
-            <tr>
-              <th>username</th>
-              <th>highscore</th>
-              <th>created_at</th>
-            </tr>
-
-            {highscores.map((h, index) => {
-              return (
-                <tr key={index}>
-                  <th>{h.username}</th>
-                  <th>{h.win_streak}</th>
-                  <th>{h.created_at}</th>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-
-        <Link to="/">
-          <Button variant="danger">Back</Button>
-        </Link>
+                  <Link to="/highscores" style={{ textDecoration: "none" }}>
+                    <h4 className="button-3d-highscores go-font">Play</h4>
+                  </Link>
+                </div>
+              </>
+            )}
+          </>
+        )}
       </div>
     );
   }
