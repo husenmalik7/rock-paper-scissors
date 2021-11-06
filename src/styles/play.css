@@ -1,0 +1,114 @@
+.background {
+  background-color: gray;
+  height: 100vh;
+}
+
+.round {
+  background-color: red;
+  height: 10%;
+  width: 100%;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.player-container {
+  background-color: lime;
+  height: 90vh;
+  width: 100%;
+}
+
+.versus-container {
+  background-color: tomato;
+  height: 90vh;
+  width: 100%;
+}
+
+.computer-container {
+  background-color: salmon;
+  height: 90vh;
+  width: 100%;
+}
+
+.item-1 {
+  background-color: blue;
+  height: 30%;
+  width: 100%;
+}
+
+.item-2 {
+  background-color: red;
+  height: 30%;
+  width: 100%;
+}
+
+.item-3 {
+  background-color: gold;
+  height: 30%;
+  width: 100%;
+}
+
+.player-select-hand-text {
+  background-color: green;
+  height: 10%;
+  width: 100%;
+}
+
+.modal-lose-center {
+  position: absolute;
+  left: 50%;
+
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: gray;
+  /* background-color: transparent; */
+
+  width: 50%;
+  height: 50%;
+}
+
+.modal-content-title {
+  background-color: green;
+  height: 25%;
+  width: 100%;
+}
+
+.modal-content-input {
+  background-color: lime;
+  height: 50%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content-button {
+  background-color: gold;
+  height: 25%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.modal-username-is-same {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background-color: transparent;
+  /* background-color: gray; */
+
+  width: 50%;
+  height: 50%;
+}

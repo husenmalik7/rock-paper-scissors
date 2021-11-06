@@ -1,250 +1,72 @@
 import React, { Component } from "react";
+import "../styles/play.css";
 
 export default class Play extends Component {
   render() {
     return (
       <>
-        <div
-          style={{
-            backgroundColor: "gray",
-            height: "100vh",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "red",
-              height: "10%",
-              width: "100%",
-
-              alignItems: "center",
-              justifyContent: "center",
-              display: "flex",
-            }}
-          >
+        <div className="background">
+          <div className="round center">
             <p>ROUND 1</p>
           </div>
 
           <div style={{ display: "flex" }}>
-            <div
-              style={{
-                backgroundColor: "lime",
-                height: "90vh",
-                width: "100%",
-              }}
-            >
-              <div
-                style={{
-                  backgroundColor: "blue",
-                  height: "30%",
-                  width: "100%",
-
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+            <div className="player-container">
+              <div className="item-1 center">
                 <p>ROCK</p>
               </div>
 
-              <div
-                style={{
-                  backgroundColor: "red",
-                  height: "30%",
-                  width: "100%",
-
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <div className="item-2 center">
                 <p>SCISSORS</p>
               </div>
 
-              <div
-                style={{
-                  backgroundColor: "gold",
-                  height: "30%",
-                  width: "100%",
-
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <div className="item-3 center">
                 <p>PAPER</p>
               </div>
 
-              <div
-                style={{
-                  backgroundColor: "green",
-                  height: "10%",
-                  width: "100%",
-
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <div className="player-select-hand-text center">
                 <p>SELECT YOUR HAND</p>
               </div>
             </div>
 
-            <div
-              style={{
-                backgroundColor: "tomato",
-                height: "90vh",
-                width: "100%",
-
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <div className="versus-container center">
               <p>VS</p>
             </div>
 
-            <div
-              style={{
-                backgroundColor: "salmon",
-                height: "90vh",
-                width: "100%",
-              }}
-            >
-              <div
-                style={{
-                  backgroundColor: "blue",
-                  height: "30%",
-                  width: "100%",
-                }}
-              />
+            <div className="computer-container">
+              <div className="item-1" />
 
-              <div
-                style={{
-                  backgroundColor: "red",
-                  height: "30%",
-                  width: "100%",
-
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <div className="item-2 center">
                 <p>?</p>
               </div>
 
-              <div
-                style={{
-                  backgroundColor: "gold",
-                  height: "30%",
-                  width: "100%",
-                }}
-              />
+              <div className="item-3" />
 
-              <div
-                style={{
-                  backgroundColor: "green",
-                  height: "10%",
-                  width: "100%",
-
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <div className="player-select-hand-text center">
                 <p>COMPUTER HAND</p>
               </div>
             </div>
           </div>
-          <div
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: "1",
-              backgroundColor: "gray",
-              // backgroundColor: "transparent",
-
-              width: "50%",
-              height: "50%",
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: "green",
-                height: "25%",
-                width: "100%",
-
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+          <div className="modal-lose-center">
+            <div className="modal-content-title center">
               <p>YOU LOSE</p>
             </div>
 
-            <div
-              style={{
-                backgroundColor: "lime",
-                height: "50%",
-                width: "100%",
-
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <div className="modal-content-input">
               <p>ENTER USERNAME</p>
               <p>INPUTAN</p>
               <p>SUBMIT</p>
             </div>
 
-            <div
-              style={{
-                backgroundColor: "gold",
-                height: "25%",
-                width: "100%",
-
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                paddingLeft: "10%",
-                paddingRight: "10%",
-              }}
-            >
+            <div className="modal-content-button">
               <p>PLAY AGAIN</p>
               <p>HOME</p>
             </div>
           </div>
 
-          <div
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: "2",
-              // backgroundColor: "gray",
-              backgroundColor: "transparent",
-
-              width: "50%",
-              height: "50%",
-            }}
-          />
+          <div className="modal-username-is-same" />
         </div>
       </>
     );
   }
 }
-
-// .center {
-//   display: flex;
-//   align-items: center;
-//   height: 100vh;
-// }
-
-// position: absolute;
-// left: 0px;
-// top: 0px;
-// z-index: -1;
