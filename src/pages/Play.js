@@ -1,149 +1,250 @@
 import React, { Component } from "react";
 
-import { Button } from "react-bootstrap";
-import ModalPlay from "../components/ModalPlay";
-import Axios from "axios";
-
-let API_URL = "https://rock-paper-scissors-api-heroku.herokuapp.com/highscore";
-
 export default class Play extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      playerHand: 0,
-      computerHand: 0,
-      score: 0,
-      lastScore: 0,
-      isShowModalLose: false,
-    };
-  }
-
-  closeModal = async (condition, username) => {
-    console.log(`hello ${username}`);
-
-    if (!username) {
-      alert("please enter your name");
-    } else {
-      let isPostLoseNotFoundUsername = await this.postLose(
-        username,
-        this.state.lastScore
-      );
-
-      // console.log({ isPostLoseNotFoundUsername });
-      // // apakah post lose tidak menemukan kesamaan?
-      // // true = close modal
-      // // false = open modal
-
-      if (isPostLoseNotFoundUsername) {
-        this.setState({ isShowModalLose: condition });
-        return true;
-      } else {
-        return false;
-      }
-    }
-  };
-
-  async postLose(username, lastScore) {
-    console.log({ username, lastScore });
-
-    // todo handle when score is 0
-    let usernameNotFound = true;
-
-    await Axios.post(API_URL, {
-      username,
-      win_streak: lastScore,
-    })
-      .then((response) => {
-        console.log(response);
-
-        if (response.data.msg.includes("username found")) {
-          alert("username telah terpakai");
-          usernameNotFound = false;
-        } else {
-          usernameNotFound = true;
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    // console.log({ usernameNotFound });
-
-    return usernameNotFound;
-  }
-
-  handleLose() {
-    alert("Opps you Lose. computer win");
-    console.log("handleLose");
-    console.log("your last score is = " + this.state.score);
-
-    this.setState({
-      lastScore: this.state.score,
-      score: 0,
-      isShowModalLose: true,
-    });
-  }
-
-  handleBattle() {
-    let { playerHand, computerHand, score } = this.state;
-
-    if (playerHand === 0) {
-      alert("select hand");
-      return false;
-    }
-
-    computerHand = Math.floor(Math.random() * 3) + 1;
-    console.log(computerHand);
-    this.setState({ computerHand });
-
-    if (playerHand === computerHand) {
-      alert("draw");
-    } else {
-      if (playerHand === 1) {
-        playerHand += 3;
-      }
-
-      if (playerHand - 1 === computerHand) {
-        alert("player win");
-        this.setState({ score: score + 1 });
-      } else {
-        this.handleLose();
-      }
-    }
-  }
-
   render() {
     return (
-      <div>
-        <h2>play</h2>
+      <>
+        <div
+          style={{
+            backgroundColor: "gray",
+            height: "100vh",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "red",
+              height: "10%",
+              width: "100%",
 
-        <h2>select your hand</h2>
-        <h2>player hand = {this.state.playerHand}</h2>
-        <h2>computer hand = {this.state.computerHand}</h2>
+              alignItems: "center",
+              justifyContent: "center",
+              display: "flex",
+            }}
+          >
+            <p>ROUND 1</p>
+          </div>
 
-        <h2>win streak = {this.state.score}</h2>
+          <div style={{ display: "flex" }}>
+            <div
+              style={{
+                backgroundColor: "lime",
+                height: "90vh",
+                width: "100%",
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: "blue",
+                  height: "30%",
+                  width: "100%",
 
-        <Button onClick={() => this.setState({ playerHand: 3 })}>Rock 3</Button>
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>ROCK</p>
+              </div>
 
-        <Button onClick={() => this.setState({ playerHand: 2 })}>
-          Scissors 2
-        </Button>
+              <div
+                style={{
+                  backgroundColor: "red",
+                  height: "30%",
+                  width: "100%",
 
-        <Button onClick={() => this.setState({ playerHand: 1 })}>
-          Paper 1
-        </Button>
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>SCISSORS</p>
+              </div>
 
-        <br />
-        <br />
+              <div
+                style={{
+                  backgroundColor: "gold",
+                  height: "30%",
+                  width: "100%",
 
-        <ModalPlay
-          isShowModal={this.state.isShowModalLose}
-          scoreModal={this.state.lastScore}
-          closeModal={this.closeModal}
-        />
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>PAPER</p>
+              </div>
 
-        <Button onClick={() => this.handleBattle()}>Battle</Button>
-      </div>
+              <div
+                style={{
+                  backgroundColor: "green",
+                  height: "10%",
+                  width: "100%",
+
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>SELECT YOUR HAND</p>
+              </div>
+            </div>
+
+            <div
+              style={{
+                backgroundColor: "tomato",
+                height: "90vh",
+                width: "100%",
+
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <p>VS</p>
+            </div>
+
+            <div
+              style={{
+                backgroundColor: "salmon",
+                height: "90vh",
+                width: "100%",
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: "blue",
+                  height: "30%",
+                  width: "100%",
+                }}
+              />
+
+              <div
+                style={{
+                  backgroundColor: "red",
+                  height: "30%",
+                  width: "100%",
+
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>?</p>
+              </div>
+
+              <div
+                style={{
+                  backgroundColor: "gold",
+                  height: "30%",
+                  width: "100%",
+                }}
+              />
+
+              <div
+                style={{
+                  backgroundColor: "green",
+                  height: "10%",
+                  width: "100%",
+
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>COMPUTER HAND</p>
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: "1",
+              backgroundColor: "gray",
+              // backgroundColor: "transparent",
+
+              width: "50%",
+              height: "50%",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "green",
+                height: "25%",
+                width: "100%",
+
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <p>YOU LOSE</p>
+            </div>
+
+            <div
+              style={{
+                backgroundColor: "lime",
+                height: "50%",
+                width: "100%",
+
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <p>ENTER USERNAME</p>
+              <p>INPUTAN</p>
+              <p>SUBMIT</p>
+            </div>
+
+            <div
+              style={{
+                backgroundColor: "gold",
+                height: "25%",
+                width: "100%",
+
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                paddingLeft: "10%",
+                paddingRight: "10%",
+              }}
+            >
+              <p>PLAY AGAIN</p>
+              <p>HOME</p>
+            </div>
+          </div>
+
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: "2",
+              // backgroundColor: "gray",
+              backgroundColor: "transparent",
+
+              width: "50%",
+              height: "50%",
+            }}
+          />
+        </div>
+      </>
     );
   }
 }
+
+// .center {
+//   display: flex;
+//   align-items: center;
+//   height: 100vh;
+// }
+
+// position: absolute;
+// left: 0px;
+// top: 0px;
+// z-index: -1;

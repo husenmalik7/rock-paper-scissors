@@ -148,7 +148,7 @@ export default class Highscores extends Component {
                     />
                   </div>
 
-                  <Link to="/highscores" style={{ textDecoration: "none" }}>
+                  <Link to="/play" style={{ textDecoration: "none" }}>
                     <h4 className="button-3d-highscores go-font">Play</h4>
                   </Link>
                 </div>
