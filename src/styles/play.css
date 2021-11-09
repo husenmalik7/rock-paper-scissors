@@ -1,3 +1,19 @@
+h2 {
+  font-family: game-over, bold;
+  text-align: center;
+  color: #e9a6a6;
+}
+
+h4 {
+  font-family: game-over, bold;
+  color: #e9a6a6;
+}
+
+h5 {
+  font-family: game-over, bold;
+  color: #e9a6a6;
+}
+
 .background {
   background-color: gray;
   height: 100vh;
@@ -37,18 +53,43 @@
   background-color: blue;
   height: 30%;
   width: 100%;
+
+  font-size: 5em;
 }
 
 .item-2 {
   background-color: red;
   height: 30%;
   width: 100%;
+
+  font-size: 5em;
+}
+
+.item-2-comp {
+  background-color: lime;
+  height: 30%;
+  width: 100%;
+
+  font-size: 5em;
 }
 
 .item-3 {
   background-color: gold;
   height: 30%;
   width: 100%;
+
+  font-size: 5em;
+}
+
+/* .item-1:hover,
+.item-2:hover,
+.item-3:hover {
+  cursor: pointer;
+} */
+
+.icon:hover {
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
 .player-select-hand-text {
@@ -106,9 +147,32 @@
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  background-color: transparent;
-  /* background-color: gray; */
+  /* background-color: transparent; */
+  background-color: gray;
+
+  width: 70%;
+  height: 70%;
+
+  display: flex;
+}
+
+.modal-username-is-same-item-1 {
+  background-color: lime;
+
+  align-items: center;
+  justify-content: center;
+  display: flex;
 
   width: 50%;
-  height: 50%;
+}
+
+.modal-username-is-same-item-2 {
+  background-color: royalblue;
+
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+
+  width: 50%;
 }

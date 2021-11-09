@@ -1,6 +1,3 @@
-// TODO: create fixed position for table and pagination
-// TODO: responsive pagination css
-
 import React, { Component } from "react";
 import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";

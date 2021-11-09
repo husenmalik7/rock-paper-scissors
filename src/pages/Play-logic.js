@@ -46,7 +46,6 @@ export default class Play extends Component {
   async postLose(username, lastScore) {
     console.log({ username, lastScore });
 
-    // todo handle when score is 0
     let usernameNotFound = true;
 
     await Axios.post(API_URL, {
