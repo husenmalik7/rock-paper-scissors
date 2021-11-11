@@ -2,9 +2,10 @@
 TODO
  
 ongoing
-   remove env from git
-   clear database
    deploy to netlify
+   update readme md
+   clear database
+   
  
 backlog
    add animation delay when lose or winning
