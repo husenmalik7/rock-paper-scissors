@@ -7,7 +7,6 @@ import { Pagin } from "../components/Pagin";
 
 import "../styles/high-scores.css";
 
-// const API_URL ="https://rock-paper-scissors-api-heroku.herokuapp.com/highscorezxc";
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default class Highscores extends Component {

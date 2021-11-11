@@ -1,24 +1,6 @@
-/**
- * TODO
- *
- * add animation delay when lose or winning
- * loading when post username
- * create fixed position for table and pagination
- * give text when win streak reach something exp double kill killin spree monster kill etc
- * change alert to red text
- *
- * low prior
- *
- * alert when user reload or want to exit
- * handle when score is 0
- *
- * done
- * responsive pagination css
- *
- */
-
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 import Axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -34,7 +16,22 @@ import "../styles/button.css";
 import versusImage from "../assets/versus.png";
 import usernameAT from "../assets/username-a-t.jpg";
 
-let API_URL = "https://rock-paper-scissors-api-heroku.herokuapp.com/highscore";
+const API_URL = process.env.REACT_APP_API_URL;
+
+let winMessages = [
+  "Outstanding",
+  "You Rock!",
+  "Even sad panda smile",
+  "this is win message",
+  "Plus Ultra",
+  "You did it!",
+  "hasta la vista baby",
+  "Monster kill",
+  "Killing Spree",
+  "Dominating",
+  "Unstoppable",
+  "Wicked Sick",
+];
 
 export default class Play extends Component {
   constructor(props) {
@@ -42,74 +39,101 @@ export default class Play extends Component {
     this.state = {
       playerHand: 0,
       computerHand: 0,
+      computerRandomAnimation: 0, // 0 for question mark
 
       score: 0,
       lastScore: 0,
+      round: 1,
       isShowModalLose: false,
+      isAnimationLoading: false,
       isUsernameSame: false,
+      isLoadingPost: false,
       whoWin: "",
       username: "",
     };
+  }
+
+  handleBattle(playerHand) {
+    if (this.state.isShowModalLose) return true;
+
+    let { computerHand, score, round } = this.state;
+
+    computerHand = Math.floor(Math.random() * 3) + 1;
+
+    this.setState({
+      playerHand: playerHand,
+      isAnimationLoading: true,
+      computerHand,
+    });
+
+    let timer = setInterval(() => {
+      let random = Math.floor(Math.random() * 3) + 1;
+      this.setState({ computerRandomAnimation: random });
+    }, 50);
+
+    setTimeout(() => {
+      if (playerHand === computerHand) {
+        this.setState({ whoWin: "draw", round: round + 1 });
+      } else {
+        if (playerHand === 1) {
+          playerHand += 3;
+        }
+
+        if (playerHand - 1 === computerHand) {
+          this.setState({
+            whoWin: "You win",
+            score: score + 1,
+            round: round + 1,
+          });
+        } else {
+          this.setState({ whoWin: "Computer win" });
+          this.handleLose();
+        }
+      }
+
+      this.setState({
+        computerRandomAnimation: computerHand,
+        isAnimationLoading: false,
+      });
+      clearInterval(timer);
+    }, 2000);
   }
 
   handleLose() {
     this.setState({
       lastScore: this.state.score,
       score: 0,
+      round: 1,
       isShowModalLose: true,
     });
-  }
-
-  handleBattle(playerHand) {
-    if (this.state.isShowModalLose) return true;
-
-    this.setState({ playerHand: playerHand });
-
-    let { computerHand, score } = this.state;
-
-    computerHand = Math.floor(Math.random() * 3) + 1;
-    this.setState({ computerHand });
-
-    if (playerHand === computerHand) {
-      this.setState({ whoWin: "draw" });
-    } else {
-      if (playerHand === 1) {
-        playerHand += 3;
-      }
-
-      if (playerHand - 1 === computerHand) {
-        this.setState({ whoWin: "player win", score: score + 1 });
-      } else {
-        this.setState({ whoWin: "computer win" });
-        this.handleLose();
-      }
-    }
   }
 
   async handleSubmit() {
     let { username, lastScore } = this.state;
 
     if (!username) {
-      alert("masukan username");
+      alert("Please enter username");
     } else {
       let pattern = /^\S+$/g; //non-whitespace from beginning to end
 
       let resultRegex = pattern.test(username);
 
       if (!resultRegex) {
-        alert("username tidak boleh mengandung spasi");
+        alert("username can't contain space");
       } else {
+        this.setState({ isLoadingPost: true });
+
         let isPostLoseNotFoundUsername = await this.postLose(
           username,
           lastScore
         );
 
+        this.setState({ isLoadingPost: false });
+
         if (!isPostLoseNotFoundUsername) {
-          // alert("username telah terpakai");
           this.setState({ isUsernameSame: true });
         } else {
-          alert("anda telah submit highscore");
-          // this.setState({ isShowModalLose: false });
+          alert("Congratulations, your highscore has been submitted");
 
           this.props.history.push("/highscores?page=1");
         }
@@ -118,9 +142,6 @@ export default class Play extends Component {
   }
 
   async postLose(username, lastScore) {
-    console.log(username);
-    console.log(lastScore);
-
     let usernameNotFound = true;
 
     await Axios.post(API_URL, {
@@ -147,8 +168,14 @@ export default class Play extends Component {
     return (
       <>
         <div className="background">
-          <div className="round center">
-            <h4>ROUND 1</h4>
+          <div className="round">
+            <h4>ROUND {this.state.round}</h4>
+
+            {this.state.isShowModalLose ? (
+              <h4>Your Score {this.state.lastScore}</h4>
+            ) : (
+              <h4>Your Score {this.state.score}</h4>
+            )}
           </div>
 
           <div style={{ display: "flex" }}>
@@ -157,7 +184,9 @@ export default class Play extends Component {
                 <FontAwesomeIcon
                   className="icon"
                   icon={faHandRock}
-                  onClick={() => this.handleBattle(3)}
+                  onClick={() =>
+                    this.state.isAnimationLoading ? null : this.handleBattle(3)
+                  }
                 />
               </div>
 
@@ -165,7 +194,9 @@ export default class Play extends Component {
                 <FontAwesomeIcon
                   className="icon"
                   icon={faHandScissors}
-                  onClick={() => this.handleBattle(2)}
+                  onClick={() =>
+                    this.state.isAnimationLoading ? null : this.handleBattle(2)
+                  }
                 />
               </div>
 
@@ -173,7 +204,9 @@ export default class Play extends Component {
                 <FontAwesomeIcon
                   className="icon"
                   icon={faHandPaper}
-                  onClick={() => this.handleBattle(1)}
+                  onClick={() =>
+                    this.state.isAnimationLoading ? null : this.handleBattle(1)
+                  }
                 />
               </div>
 
@@ -182,24 +215,43 @@ export default class Play extends Component {
               </div>
             </div>
 
-            {/* <div className="versus-container center"> */}
             <div className="versus-container">
-              <p>player hand ={this.state.playerHand} </p>
-              <p>computer hand ={this.state.computerHand} </p>
-
-              <p>who win ={this.state.whoWin} </p>
-
-              <p>win streaks ={this.state.score} </p>
-              <p>lastScore ={this.state.lastScore} </p>
-
               <img src={versusImage} alt="versus" width="30%" />
+
+              <br />
+              <br />
+
+              {this.state.whoWin === "You win" ? (
+                <>
+                  <h4>YOU WIN</h4>
+                  {this.state.isAnimationLoading ? null : (
+                    <h4>
+                      {
+                        winMessages[
+                          Math.floor(Math.random() * winMessages.length) + 1
+                        ]
+                      }
+                    </h4>
+                  )}
+                </>
+              ) : this.state.whoWin === "draw" ? (
+                <h4>DRAW</h4>
+              ) : null}
             </div>
 
             <div className="computer-container">
               <div className="item-1" />
 
               <div className="item-2-comp center">
-                <FontAwesomeIcon icon={faQuestionCircle} />
+                {this.state.computerRandomAnimation === 0 ? (
+                  <FontAwesomeIcon icon={faQuestionCircle} />
+                ) : this.state.computerRandomAnimation === 3 ? (
+                  <FontAwesomeIcon icon={faHandRock} />
+                ) : this.state.computerRandomAnimation === 2 ? (
+                  <FontAwesomeIcon icon={faHandScissors} />
+                ) : (
+                  <FontAwesomeIcon icon={faHandPaper} />
+                )}
               </div>
 
               <div className="item-3" />
@@ -282,6 +334,12 @@ export default class Play extends Component {
                   </h5>
                 </Link>
               </div>
+            </div>
+          ) : null}
+
+          {this.state.isLoadingPost ? (
+            <div className="modal-loading-post center">
+              <Spinner animation="border" variant="light" />
             </div>
           ) : null}
         </div>

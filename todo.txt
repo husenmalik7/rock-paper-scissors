@@ -1,0 +1,32 @@
+
+TODO
+ 
+ongoing
+   remove env from git
+   clear database
+   deploy to netlify
+ 
+backlog
+   add animation delay when lose or winning
+   create fixed position for table and pagination (10 row vs 5 row)
+   create how to play / rules
+ 
+low prior
+   change alert to red text
+   alert when user reload or want to exit
+   handle when score is 0  //what is this actually?
+ 
+done
+   give text when win streak reach something exp double kill killin spree monster kill etc
+   responsive pagination css
+   loading when post username
+   animation computer random
+   handle bug abuse multiple click
+   styleup play page
+   clean console.log
+ 
+ 
+
+ Rules
+ once you are in game you must play, or you lose all you got
+ just play to make highest win steaks

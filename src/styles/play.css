@@ -15,14 +15,17 @@ h5 {
 }
 
 .background {
-  background-color: gray;
+  background-color: #1f1d36;
   height: 100vh;
 }
 
 .round {
-  background-color: red;
+  /* background-color: red; */
   height: 10%;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .center {
@@ -32,51 +35,60 @@ h5 {
 }
 
 .player-container {
-  background-color: lime;
+  /* background-color: lime; */
   height: 90vh;
   width: 100%;
 }
 
 .versus-container {
-  background-color: tomato;
+  /* background-color: tomato; */
   height: 90vh;
   width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .computer-container {
-  background-color: salmon;
+  /* background-color: salmon; */
   height: 90vh;
   width: 100%;
 }
 
 .item-1 {
-  background-color: blue;
+  /* background-color: blue; */
   height: 30%;
   width: 100%;
+  color: #b983ff;
 
   font-size: 5em;
 }
 
 .item-2 {
-  background-color: red;
+  /* background-color: red; */
   height: 30%;
   width: 100%;
+  color: #b983ff;
 
   font-size: 5em;
 }
 
 .item-2-comp {
-  background-color: lime;
+  /* background-color: lime; */
   height: 30%;
   width: 100%;
+  color: #864879;
 
   font-size: 5em;
 }
 
 .item-3 {
-  background-color: gold;
+  /* background-color: gold; */
   height: 30%;
   width: 100%;
+  color: #b983ff;
 
   font-size: 5em;
 }
@@ -93,7 +105,7 @@ h5 {
 }
 
 .player-select-hand-text {
-  background-color: green;
+  /* background-color: green; */
   height: 10%;
   width: 100%;
 }
@@ -105,21 +117,23 @@ h5 {
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  background-color: gray;
+  /* background-color: gray; */
   /* background-color: transparent; */
+  background-color: #3d2c8d;
+  border-radius: 10px;
 
   width: 50%;
   height: 50%;
 }
 
 .modal-content-title {
-  background-color: green;
+  /* background-color: rgba(200, 10, 10, 0.3); */
   height: 25%;
   width: 100%;
 }
 
 .modal-content-input {
-  background-color: lime;
+  /* background-color: lime; */
   height: 50%;
   width: 100%;
 
@@ -130,7 +144,7 @@ h5 {
 }
 
 .modal-content-button {
-  background-color: gold;
+  /* background-color: gold; */
   height: 25%;
   width: 100%;
 
@@ -148,7 +162,9 @@ h5 {
   transform: translate(-50%, -50%);
   z-index: 2;
   /* background-color: transparent; */
-  background-color: gray;
+  background-color: #3d2c8d;
+
+  border-radius: 1%;
 
   width: 70%;
   height: 70%;
@@ -157,7 +173,7 @@ h5 {
 }
 
 .modal-username-is-same-item-1 {
-  background-color: lime;
+  /* background-color: lime; */
 
   align-items: center;
   justify-content: center;
@@ -167,7 +183,7 @@ h5 {
 }
 
 .modal-username-is-same-item-2 {
-  background-color: royalblue;
+  /* background-color: royalblue; */
 
   align-items: center;
   justify-content: center;
@@ -175,4 +191,17 @@ h5 {
   flex-direction: column;
 
   width: 50%;
+}
+
+.modal-loading-post {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  /* background-color: transparent; */
+  background-color: rgba(0, 0, 0, 0.5);
+
+  width: 100%;
+  height: 100%;
 }
