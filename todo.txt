@@ -2,7 +2,6 @@
 TODO
  
 ongoing
-   deploy to netlify
    update readme md
    clear database
    
@@ -25,6 +24,7 @@ done
    handle bug abuse multiple click
    styleup play page
    clean console.log
+   deploy to netlify
  
  
 
