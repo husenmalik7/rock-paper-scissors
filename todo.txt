@@ -2,14 +2,16 @@
 TODO
  
 ongoing
-   update readme md
-   clear database
+   
+   
    
  
 backlog
    add animation delay when lose or winning
    create fixed position for table and pagination (10 row vs 5 row)
    create how to play / rules
+   add rule for username length, dont too much or too less
+   move env database to another dimension
  
 low prior
    change alert to red text
@@ -25,6 +27,8 @@ done
    styleup play page
    clean console.log
    deploy to netlify
+   clear database
+   update readme md
  
  
 
